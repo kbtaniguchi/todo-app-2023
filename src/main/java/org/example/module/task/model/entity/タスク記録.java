@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.example.framework.EventEntity;
-import org.example.module.task.model.type.タスク進捗状態;
+import org.example.framework.entity.エンティティ型;
+import org.example.module.task.model.type.タスク進捗状態値;
 import org.hibernate.Hibernate;
 import org.hibernate.envers.AuditOverride;
 import org.hibernate.envers.Audited;
@@ -14,17 +14,17 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@Entity
 @ToString(callSuper = true)
+@Entity
 @Audited
-@AuditOverride(forClass = EventEntity.class)
-public class タスク記録 extends EventEntity {
+@AuditOverride(forClass = エンティティ型.class)
+public class タスク記録 extends エンティティ型 {
     @Column(nullable = false)
     String 名称;
     String メモ;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    タスク進捗状態 進捗状態;
+    タスク進捗状態値 進捗状態;
 
     @Override
     public boolean equals(Object o) {

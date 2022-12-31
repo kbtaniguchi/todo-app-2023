@@ -1,4 +1,4 @@
-package org.example.framework;
+package org.example.framework.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -15,21 +15,21 @@ import java.time.LocalDateTime;
 @ToString
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class EventEntity {
+public abstract class エンティティ型 {
     @Id
     @GeneratedValue
     protected Long id;
     @Version
     @Column(nullable = false)
-    protected Integer version;
+    protected Integer バージョン;
 
     @CreatedBy
-    protected String createdBy;
+    protected String 作成者;
     @CreatedDate
-    protected LocalDateTime createdAt;
+    protected LocalDateTime 作成日時;
 
     @LastModifiedBy
-    protected String revisedBy;
+    protected String 最終更新者;
     @LastModifiedDate
-    protected LocalDateTime revisedAt;
+    protected LocalDateTime 最終更新日時;
 }
