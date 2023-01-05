@@ -12,6 +12,7 @@ import java.util.Optional;
 public class JpaConfig {
     @Bean
     public AuditorAware<String> auditorAware() {
+        // TODO
         return () -> Optional.of("loginUser");
     }
 }
