@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.Hibernate;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -13,6 +14,7 @@ import org.springframework.orm.ObjectOptimisticLockingFailureException;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @ToString
 @Getter
@@ -46,5 +48,18 @@ public abstract class 記録型 implements Serializable {
         if (!コマンド.バージョン().equals(new バージョン型(バージョン)))
             throw new ObjectOptimisticLockingFailureException(getClass(), id);
         コマンド.編集する((E) this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        記録型 記録型 = (記録型) o;
+        return id != null && Objects.equals(id, 記録型.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
