@@ -21,6 +21,7 @@ import org.hibernate.envers.Audited;
 public class タスク記録 extends 記録型 {
     @Column(nullable = false)
     String 名称;
+    @Column(length = 511)
     String メモ;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
