@@ -10,4 +10,9 @@ public record タスク削除指示型(
         バージョン型 バージョン
 
 ) implements コマンド型<タスク記録> {
+
+    @Override
+    public void 編集する(タスク記録 記録) {
+        // do nothing
+    }
 }
