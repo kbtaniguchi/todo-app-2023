@@ -16,7 +16,6 @@ public record タスク編集指示型(
 
     @Override
     public void 編集する(タスク記録 記録) {
-        記録.バージョン(バージョン.value());
         記録.名称(タスク名称.value());
         記録.メモ(タスクメモ.value());
     }
