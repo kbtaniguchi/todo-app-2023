@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class タスクポリシー型 {
+public class タスク登録ポリシー型 {
     final タスクリポジトリ型 タスクリポジトリ;
     final static int タスク登録可能数上限 = 50;
 

@@ -9,8 +9,10 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.domain.AbstractAggregateRoot;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
+import org.springframework.util.SerializationUtils;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,7 +23,7 @@ import java.util.Objects;
 @Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class 可変記録型 implements Serializable, 記録型 {
+public abstract class 可変記録型 extends AbstractAggregateRoot<可変記録型> implements Serializable, 記録型 {
     @Id
     @GeneratedValue
     protected Long id;
@@ -44,10 +46,12 @@ public abstract class 可変記録型 implements Serializable, 記録型 {
     protected LocalDateTime 最終更新日時;
 
     @SuppressWarnings("unchecked")
-    public <E extends 記録型> void 適用する(コマンド型<E> コマンド) {
+    public <E extends 可変記録型> void 適用する(コマンド型<E> コマンド) {
         if (!コマンド.バージョン().equals(new バージョン型(バージョン)))
             throw new ObjectOptimisticLockingFailureException(getClass(), id);
+        E コマンド適用前 = (E) SerializationUtils.clone(this);
         コマンド.編集する((E) this);
+        this.registerEvent(new イベント型<>((E) this, コマンド, コマンド適用前));
     }
 
     @Override

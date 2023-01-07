@@ -29,11 +29,6 @@ public abstract class 不変記録型 implements Serializable, 記録型 {
     @Column(nullable = false)
     protected LocalDateTime 作成日時;
 
-    @SuppressWarnings("unchecked")
-    public <E extends 記録型> void 適用する(コマンド型<E> コマンド) {
-        コマンド.編集する((E) this);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

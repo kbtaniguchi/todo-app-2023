@@ -6,14 +6,14 @@ import org.example.framework.exception.業務例外型;
 import org.example.module.task.model.command.タスク登録指示型;
 import org.example.module.task.model.entity.タスク記録型;
 import org.example.module.task.model.repository.タスクリポジトリ型;
-import org.example.module.task.model.rule.タスクポリシー型;
+import org.example.module.task.model.rule.タスク登録ポリシー型;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class タスクを登録するUC {
     final タスクリポジトリ型 タスクリポジトリ;
-    final タスクポリシー型 タスクポリシー;
+    final タスク登録ポリシー型 タスクポリシー;
 
     @Transactional
     public タスク記録型 実行する(タスク登録指示型 登録指示) {

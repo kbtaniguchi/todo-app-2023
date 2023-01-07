@@ -4,12 +4,12 @@ import org.example.framework.entity.コマンド型;
 import org.example.framework.entity.バージョン型;
 import org.example.module.task.model.entity.タスク記録型;
 import org.example.module.task.model.type.タスクID型;
-import org.example.module.task.model.type.タスク進捗状態型;
+import org.example.module.task.model.type.タスク進捗状態区分型;
 
 public record タスク進捗状態変更指示型(
         タスクID型 タスクID,
         バージョン型 バージョン,
-        タスク進捗状態型 タスク進捗状態
+        タスク進捗状態区分型 タスク進捗状態
 ) implements コマンド型<タスク記録型> {
 
     @Override
