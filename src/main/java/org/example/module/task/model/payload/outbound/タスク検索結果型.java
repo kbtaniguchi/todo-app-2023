@@ -1,14 +1,14 @@
 package org.example.module.task.model.payload.outbound;
 
-import org.example.module.task.model.entity.タスク記録;
+import org.example.module.task.model.entity.タスク記録型;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class タスク検索結果型 implements Serializable {
-    List<タスク記録> list;
+    List<タスク記録型> list;
 
-    public タスク検索結果型(List<タスク記録> list) {
+    public タスク検索結果型(List<タスク記録型> list) {
         this.list = list;
     }
 

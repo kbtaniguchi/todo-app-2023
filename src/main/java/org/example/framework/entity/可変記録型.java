@@ -21,7 +21,7 @@ import java.util.Objects;
 @Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class 記録型 implements Serializable {
+public abstract class 可変記録型 implements Serializable, 記録型 {
     @Id
     @GeneratedValue
     protected Long id;
@@ -54,8 +54,8 @@ public abstract class 記録型 implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        記録型 記録型 = (記録型) o;
-        return id != null && Objects.equals(id, 記録型.id);
+        可変記録型 記録 = (可変記録型) o;
+        return id != null && Objects.equals(id, 記録.id);
     }
 
     @Override

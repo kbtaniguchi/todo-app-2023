@@ -5,7 +5,7 @@ import org.example.module.task.model.command.タスク削除指示型;
 import org.example.module.task.model.command.タスク登録指示型;
 import org.example.module.task.model.command.タスク編集指示型;
 import org.example.module.task.model.command.タスク進捗状態変更指示型;
-import org.example.module.task.model.entity.タスク記録;
+import org.example.module.task.model.entity.タスク記録型;
 import org.example.module.task.model.payload.outbound.タスク検索結果型;
 import org.example.module.task.model.repository.タスクリポジトリ型;
 import org.example.module.task.model.type.*;
@@ -43,7 +43,7 @@ class タスクシナリオテスト {
     @Test
     void 登録_編集_状態変更_削除ができる() {
         タスク登録指示型 登録指示 = new タスク登録指示型(new タスク名称型("テスト1"), new タスクメモ型(null));
-        タスク記録 登録済み = タスクを登録する.実行する(登録指示);
+        タスク記録型 登録済み = タスクを登録する.実行する(登録指示);
         タスクID型 id = new タスクID型(登録済み.id());
         assertEquals(登録済み.バージョン(), 0);
         assertEquals(登録済み.名称(), "テスト1");
@@ -51,13 +51,13 @@ class タスクシナリオテスト {
         assertEquals(登録済み.進捗状態(), タスク進捗状態値.TODO);
 
         タスク編集指示型 編集指示 = new タスク編集指示型(id, new バージョン型(0), new タスク名称型("テスト2"), new タスクメモ型("テスト2メモ"));
-        タスク記録 編集済み = タスクを編集する.実行する(編集指示);
+        タスク記録型 編集済み = タスクを編集する.実行する(編集指示);
         assertEquals(編集済み.バージョン(), 1);
         assertEquals(編集済み.名称(), "テスト2");
         assertEquals(編集済み.メモ(), "テスト2メモ");
 
         タスク進捗状態変更指示型 進捗状態変更指示 = new タスク進捗状態変更指示型(id, new バージョン型(1), new タスク進捗状態型(タスク進捗状態値.DONE));
-        タスク記録 状態変更済み = タスクの進捗状態を変更する.実行する(進捗状態変更指示);
+        タスク記録型 状態変更済み = タスクの進捗状態を変更する.実行する(進捗状態変更指示);
         assertEquals(状態変更済み.バージョン(), 2);
         assertEquals(状態変更済み.進捗状態(), タスク進捗状態値.DONE);
 
@@ -76,14 +76,14 @@ class タスクシナリオテスト {
     @Test
     void 編集_状態変更_削除のユースケースに渡すコマンドのバージョンが古い場合に楽観ロックエラーになる() {
         タスク登録指示型 登録指示 = new タスク登録指示型(new タスク名称型("テスト1"), new タスクメモ型(null));
-        タスク記録 登録済み = タスクを登録する.実行する(登録指示);
+        タスク記録型 登録済み = タスクを登録する.実行する(登録指示);
         タスクID型 id = new タスクID型(登録済み.id());
         assertEquals(登録済み.バージョン(), 0);
         assertEquals(登録済み.名称(), "テスト1");
         assertNull(登録済み.メモ());
 
         タスク編集指示型 編集指示1 = new タスク編集指示型(id, new バージョン型(0), new タスク名称型("テスト2"), new タスクメモ型("テスト2メモ"));
-        タスク記録 編集済み = タスクを編集する.実行する(編集指示1);
+        タスク記録型 編集済み = タスクを編集する.実行する(編集指示1);
         assertEquals(編集済み.バージョン(), 1);
         assertEquals(編集済み.名称(), "テスト2");
         assertEquals(編集済み.メモ(), "テスト2メモ");
