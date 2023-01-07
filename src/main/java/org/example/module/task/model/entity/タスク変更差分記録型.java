@@ -19,8 +19,6 @@ public class タスク変更差分記録型 extends 不変記録型 {
     @Column(nullable = false)
     Long タスクID;
     @Column(nullable = false)
-    Integer バージョン;
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     タスク変更区分値 変更区分;
     @ElementCollection

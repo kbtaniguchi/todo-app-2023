@@ -8,6 +8,7 @@ import org.example.framework.entity.可変記録型;
 import org.example.module.task.model.type.タスク進捗状態区分値;
 import org.hibernate.envers.AuditOverride;
 import org.hibernate.envers.Audited;
+import org.springframework.util.SerializationUtils;
 
 @ToString(callSuper = true)
 @Getter
@@ -24,4 +25,8 @@ public class タスク記録型 extends 可変記録型 {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     タスク進捗状態区分値 進捗状態;
+
+    public タスク記録型 ディープコピーする() {
+        return SerializationUtils.clone(this);
+    }
 }
