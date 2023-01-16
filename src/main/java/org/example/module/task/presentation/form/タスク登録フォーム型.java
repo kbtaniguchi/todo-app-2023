@@ -1,4 +1,4 @@
-package org.example.module.task.model.payload.inbound;
+package org.example.module.task.presentation.form;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -10,16 +10,16 @@ import java.io.Serializable;
 
 public class タスク登録フォーム型 implements Serializable {
     @NotNull
-    @Size(min = 1, max = 255)
-    String 名称;
+    @Size(min = タスク名称型.最小桁数, max = タスク名称型.最大桁数)
+    String name;
 
-    @Size(max = 255)
-    String メモ;
+    @Size(max = タスクメモ型.最大桁数)
+    String memo;
 
     public タスク登録指示型 コマンドへ変換する() {
         return new タスク登録指示型(
-                new タスク名称型(名称),
-                new タスクメモ型(メモ)
+                new タスク名称型(name),
+                new タスクメモ型(memo)
         );
     }
 }

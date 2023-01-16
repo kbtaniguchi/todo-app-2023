@@ -6,7 +6,7 @@ import org.example.module.task.model.command.タスク登録指示型;
 import org.example.module.task.model.command.タスク編集指示型;
 import org.example.module.task.model.command.タスク進捗状態変更指示型;
 import org.example.module.task.model.entity.タスク記録型;
-import org.example.module.task.model.payload.outbound.タスク検索結果型;
+import org.example.module.task.model.entity.タスク一覧型;
 import org.example.module.task.model.repository.タスクリポジトリ型;
 import org.example.module.task.model.type.*;
 import org.junit.jupiter.api.AfterEach;
@@ -69,8 +69,8 @@ class タスクシナリオテスト {
     void 全タスクの一覧を取得できる() {
         IntStream.range(0, 10)
                 .forEach(i -> タスクを登録する.実行する(new タスク登録指示型(new タスク名称型("テスト"), new タスクメモ型(Integer.toString(i)))));
-        タスク検索結果型 検索結果 = 全タスクの一覧を取得する.実行する();
-        assertEquals(検索結果.件数(), 10);
+        タスク一覧型 検索結果 = 全タスクの一覧を取得する.実行する();
+        assertEquals(検索結果.size(), 10);
     }
 
     @Test

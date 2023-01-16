@@ -1,4 +1,4 @@
-package org.example.module.task.model.payload.inbound;
+package org.example.module.task.presentation.form;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -15,20 +15,20 @@ public class タスク編集フォーム型 implements Serializable {
     Long id;
 
     @NotNull
-    Integer バージョン;
+    Integer version;
     @NotNull
-    @Size(min = 1, max = 255)
-    String 名称;
+    @Size(min = タスク名称型.最小桁数, max = タスク名称型.最大桁数)
+    String name;
 
-    @Size(max = 255)
-    String メモ;
+    @Size(max = タスクメモ型.最大桁数)
+    String memo;
 
     public タスク編集指示型 コマンドへ変換する() {
         return new タスク編集指示型(
                 new タスクID型(id),
-                new バージョン型(バージョン),
-                new タスク名称型(名称),
-                new タスクメモ型(メモ)
+                new バージョン型(version),
+                new タスク名称型(name),
+                new タスクメモ型(memo)
         );
     }
 }
